@@ -25,11 +25,11 @@ export interface CreditTopupRequired {
      */
     price_micro: number;
     /**
-     *
+     * URL for completing the required account action.
      * @type {string}
      * @memberof CreditTopupRequired
      */
-    topup_url: CreditTopupRequiredTopupUrlEnum;
+    topup_url: string;
 }
 
 
@@ -40,14 +40,6 @@ export const CreditTopupRequiredCodeEnum = {
     topup_required: 'topup_required'
 } as const;
 export type CreditTopupRequiredCodeEnum = typeof CreditTopupRequiredCodeEnum[keyof typeof CreditTopupRequiredCodeEnum];
-
-/**
- * @export
- */
-export const CreditTopupRequiredTopupUrlEnum = {
-    v1_billing_topup_intents: '/v1/billing/topup/intents'
-} as const;
-export type CreditTopupRequiredTopupUrlEnum = typeof CreditTopupRequiredTopupUrlEnum[keyof typeof CreditTopupRequiredTopupUrlEnum];
 
 /**
  *
@@ -240,22 +232,12 @@ export interface PaymentRequiredPrepaidExtensions {
  */
 export interface PaymentRequiredPrepaidExtensionsTopup {
     /**
-     *
+     * URL for completing the required account action.
      * @type {string}
      * @memberof PaymentRequiredPrepaidExtensionsTopup
      */
-    topup_url: PaymentRequiredPrepaidExtensionsTopupTopupUrlEnum;
+    topup_url: string;
 }
-
-
-/**
- * @export
- */
-export const PaymentRequiredPrepaidExtensionsTopupTopupUrlEnum = {
-    v1_billing_topup_intents: '/v1/billing/topup/intents'
-} as const;
-export type PaymentRequiredPrepaidExtensionsTopupTopupUrlEnum = typeof PaymentRequiredPrepaidExtensionsTopupTopupUrlEnum[keyof typeof PaymentRequiredPrepaidExtensionsTopupTopupUrlEnum];
-
 /**
  *
  * @export

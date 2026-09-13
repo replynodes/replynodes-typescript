@@ -7,7 +7,7 @@
   "types": "./dist/src/index.d.ts",
   "files": ["dist", "generated", "README.md", "openapi-generator-config.json"],
   "scripts": {
-    "generate": "docker run --rm --user \"$(id -u):$(id -g)\" -v \"$PWD/..:/local\" openapitools/openapi-generator-cli:v7.10.0 generate -i /local/openapi/replynodes-fetcher.openapi.json -g typescript-fetch -o /local/sdk/generated -c /local/sdk/openapi-generator-config.json --skip-validate-spec && find generated/src -type f -name '*.ts' -exec sed -i 's/[[:blank:]]*$//' {} +",
+    "generate": "node scripts/project-public-openapi.js && docker run --rm --user \"$(id -u):$(id -g)\" -v \"$PWD/..:/local\" openapitools/openapi-generator-cli:v7.10.0 generate -i /local/sdk/.generated/replynodes-fetcher.public.openapi.json -g typescript-fetch -o /local/sdk/generated -c /local/sdk/openapi-generator-config.json --skip-validate-spec && find generated/src -type f -name '*.ts' -exec sed -i 's/[[:blank:]]*$//' {} +",
     "build": "tsc -p tsconfig.json",
     "test": "npm run build && node --test test/*.test.js"
   },

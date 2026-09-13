@@ -38,4 +38,4 @@ npm run generate
 npm test
 ```
 
-`npm run generate` uses the official Docker image and `openapi-generator-config.json`; it writes only to `generated/`. No server, provider, or billing implementation is included in this repository.
+`npm run generate` uses the official Docker image and `openapi-generator-config.json`; it writes only to `generated/`. The generated client contains the public SDK contract only.

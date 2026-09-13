@@ -101,7 +101,7 @@ export interface GooglePlaySuggestRequest {
 export class GooglePlayApi extends runtime.BaseAPI {
 
     /**
-     * Fetch a single Google Play app\'s public detail record. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch a single Google Play app\'s public detail record. Returns the normalized public contract.
      * Fetch a single Google Play app\'s public detail record
      */
     async googlePlayAppDetailsRaw(requestParameters: GooglePlayAppDetailsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -143,7 +143,7 @@ export class GooglePlayApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch a single Google Play app\'s public detail record. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch a single Google Play app\'s public detail record. Returns the normalized public contract.
      * Fetch a single Google Play app\'s public detail record
      */
     async googlePlayAppDetails(requestParameters: GooglePlayAppDetailsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -152,7 +152,7 @@ export class GooglePlayApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch a Google Play app\'s per-storefront availability. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch a Google Play app\'s per-storefront availability. Returns the normalized public contract.
      * Fetch a Google Play app\'s per-storefront availability
      */
     async googlePlayAvailabilityRaw(requestParameters: GooglePlayAvailabilityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -198,7 +198,7 @@ export class GooglePlayApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch a Google Play app\'s per-storefront availability. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch a Google Play app\'s per-storefront availability. Returns the normalized public contract.
      * Fetch a Google Play app\'s per-storefront availability
      */
     async googlePlayAvailability(requestParameters: GooglePlayAvailabilityRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -207,7 +207,7 @@ export class GooglePlayApi extends runtime.BaseAPI {
     }
 
     /**
-     * List available Google Play category identifiers. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * List available Google Play category identifiers. Returns the normalized public contract.
      * List available Google Play category identifiers
      */
     async googlePlayCategoriesRaw(requestParameters: GooglePlayCategoriesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -242,7 +242,7 @@ export class GooglePlayApi extends runtime.BaseAPI {
     }
 
     /**
-     * List available Google Play category identifiers. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * List available Google Play category identifiers. Returns the normalized public contract.
      * List available Google Play category identifiers
      */
     async googlePlayCategories(requestParameters: GooglePlayCategoriesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -251,7 +251,7 @@ export class GooglePlayApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch top public apps in a Google Play category. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch top public apps in a Google Play category. Returns the normalized public contract.
      * Fetch top public apps in a Google Play category
      */
     async googlePlayCategoryAppsRaw(requestParameters: GooglePlayCategoryAppsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -297,7 +297,7 @@ export class GooglePlayApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch top public apps in a Google Play category. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch top public apps in a Google Play category. Returns the normalized public contract.
      * Fetch top public apps in a Google Play category
      */
     async googlePlayCategoryApps(requestParameters: GooglePlayCategoryAppsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -306,7 +306,7 @@ export class GooglePlayApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch a Google Play app\'s declared data-safety disclosure. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch a Google Play app\'s declared data-safety disclosure. Returns the normalized public contract.
      * Fetch a Google Play app\'s declared data-safety disclosure
      */
     async googlePlayDataSafetyRaw(requestParameters: GooglePlayDataSafetyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -348,7 +348,7 @@ export class GooglePlayApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch a Google Play app\'s declared data-safety disclosure. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch a Google Play app\'s declared data-safety disclosure. Returns the normalized public contract.
      * Fetch a Google Play app\'s declared data-safety disclosure
      */
     async googlePlayDataSafety(requestParameters: GooglePlayDataSafetyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -357,7 +357,7 @@ export class GooglePlayApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch public apps published by a Google Play developer. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch public apps published by a Google Play developer. Returns the normalized public contract.
      * Fetch public apps published by a Google Play developer
      */
     async googlePlayDeveloperRaw(requestParameters: GooglePlayDeveloperRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -407,7 +407,7 @@ export class GooglePlayApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch public apps published by a Google Play developer. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch public apps published by a Google Play developer. Returns the normalized public contract.
      * Fetch public apps published by a Google Play developer
      */
     async googlePlayDeveloper(requestParameters: GooglePlayDeveloperRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -416,7 +416,7 @@ export class GooglePlayApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch a Google Play app\'s declared permissions. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch a Google Play app\'s declared permissions. Returns the normalized public contract.
      * Fetch a Google Play app\'s declared permissions
      */
     async googlePlayPermissionsRaw(requestParameters: GooglePlayPermissionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -458,7 +458,7 @@ export class GooglePlayApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch a Google Play app\'s declared permissions. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch a Google Play app\'s declared permissions. Returns the normalized public contract.
      * Fetch a Google Play app\'s declared permissions
      */
     async googlePlayPermissions(requestParameters: GooglePlayPermissionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -467,7 +467,7 @@ export class GooglePlayApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch public reviews for a Google Play app. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch public reviews for a Google Play app. Returns the normalized public contract.
      * Fetch public reviews for a Google Play app
      */
     async googlePlayReviewsRaw(requestParameters: GooglePlayReviewsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -525,7 +525,7 @@ export class GooglePlayApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch public reviews for a Google Play app. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch public reviews for a Google Play app. Returns the normalized public contract.
      * Fetch public reviews for a Google Play app
      */
     async googlePlayReviews(requestParameters: GooglePlayReviewsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -534,7 +534,7 @@ export class GooglePlayApi extends runtime.BaseAPI {
     }
 
     /**
-     * Search public Google Play applications by term. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Search public Google Play applications by term. Returns the normalized public contract.
      * Search public Google Play applications by term
      */
     async googlePlaySearchRaw(requestParameters: GooglePlaySearchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -584,7 +584,7 @@ export class GooglePlayApi extends runtime.BaseAPI {
     }
 
     /**
-     * Search public Google Play applications by term. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Search public Google Play applications by term. Returns the normalized public contract.
      * Search public Google Play applications by term
      */
     async googlePlaySearch(requestParameters: GooglePlaySearchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -593,7 +593,7 @@ export class GooglePlayApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch apps similar to a given Google Play package. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch apps similar to a given Google Play package. Returns the normalized public contract.
      * Fetch apps similar to a given Google Play package
      */
     async googlePlaySimilarAppsRaw(requestParameters: GooglePlaySimilarAppsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -639,7 +639,7 @@ export class GooglePlayApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch apps similar to a given Google Play package. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch apps similar to a given Google Play package. Returns the normalized public contract.
      * Fetch apps similar to a given Google Play package
      */
     async googlePlaySimilarApps(requestParameters: GooglePlaySimilarAppsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -648,7 +648,7 @@ export class GooglePlayApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch Google Play search-term suggestions. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch Google Play search-term suggestions. Returns the normalized public contract.
      * Fetch Google Play search-term suggestions
      */
     async googlePlaySuggestRaw(requestParameters: GooglePlaySuggestRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -698,7 +698,7 @@ export class GooglePlayApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch Google Play search-term suggestions. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch Google Play search-term suggestions. Returns the normalized public contract.
      * Fetch Google Play search-term suggestions
      */
     async googlePlaySuggest(requestParameters: GooglePlaySuggestRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {

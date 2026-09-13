@@ -72,7 +72,7 @@ export interface HackerNewsUserRequest {
 export class HackerNewsApi extends runtime.BaseAPI {
 
     /**
-     * Fetch a single Hacker News item and its comment tree. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch a single Hacker News item and its comment tree. Returns the normalized public contract.
      * Fetch a single Hacker News item and its comment tree
      */
     async hackerNewsItemRaw(requestParameters: HackerNewsItemRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -110,7 +110,7 @@ export class HackerNewsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch a single Hacker News item and its comment tree. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch a single Hacker News item and its comment tree. Returns the normalized public contract.
      * Fetch a single Hacker News item and its comment tree
      */
     async hackerNewsItem(requestParameters: HackerNewsItemRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -119,7 +119,7 @@ export class HackerNewsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Search Hacker News via Algolia. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Search Hacker News via Algolia. Returns the normalized public contract.
      * Search Hacker News via Algolia
      */
     async hackerNewsSearchRaw(requestParameters: HackerNewsSearchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -169,7 +169,7 @@ export class HackerNewsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Search Hacker News via Algolia. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Search Hacker News via Algolia. Returns the normalized public contract.
      * Search Hacker News via Algolia
      */
     async hackerNewsSearch(requestParameters: HackerNewsSearchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -178,7 +178,7 @@ export class HackerNewsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch current Ask HN stories. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch current Ask HN stories. Returns the normalized public contract.
      * Fetch current Ask HN stories
      */
     async hackerNewsStoriesAskRaw(requestParameters: HackerNewsStoriesAskRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -213,7 +213,7 @@ export class HackerNewsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch current Ask HN stories. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch current Ask HN stories. Returns the normalized public contract.
      * Fetch current Ask HN stories
      */
     async hackerNewsStoriesAsk(requestParameters: HackerNewsStoriesAskRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -222,7 +222,7 @@ export class HackerNewsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch current Hacker News best stories. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch current Hacker News best stories. Returns the normalized public contract.
      * Fetch current Hacker News best stories
      */
     async hackerNewsStoriesBestRaw(requestParameters: HackerNewsStoriesBestRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -257,7 +257,7 @@ export class HackerNewsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch current Hacker News best stories. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch current Hacker News best stories. Returns the normalized public contract.
      * Fetch current Hacker News best stories
      */
     async hackerNewsStoriesBest(requestParameters: HackerNewsStoriesBestRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -266,7 +266,7 @@ export class HackerNewsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch current Hacker News job postings. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch current Hacker News job postings. Returns the normalized public contract.
      * Fetch current Hacker News job postings
      */
     async hackerNewsStoriesJobRaw(requestParameters: HackerNewsStoriesJobRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -301,7 +301,7 @@ export class HackerNewsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch current Hacker News job postings. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch current Hacker News job postings. Returns the normalized public contract.
      * Fetch current Hacker News job postings
      */
     async hackerNewsStoriesJob(requestParameters: HackerNewsStoriesJobRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -310,7 +310,7 @@ export class HackerNewsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch current Hacker News new stories. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch current Hacker News new stories. Returns the normalized public contract.
      * Fetch current Hacker News new stories
      */
     async hackerNewsStoriesNewRaw(requestParameters: HackerNewsStoriesNewRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -345,7 +345,7 @@ export class HackerNewsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch current Hacker News new stories. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch current Hacker News new stories. Returns the normalized public contract.
      * Fetch current Hacker News new stories
      */
     async hackerNewsStoriesNew(requestParameters: HackerNewsStoriesNewRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -354,7 +354,7 @@ export class HackerNewsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch current Show HN stories. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch current Show HN stories. Returns the normalized public contract.
      * Fetch current Show HN stories
      */
     async hackerNewsStoriesShowRaw(requestParameters: HackerNewsStoriesShowRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -389,7 +389,7 @@ export class HackerNewsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch current Show HN stories. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch current Show HN stories. Returns the normalized public contract.
      * Fetch current Show HN stories
      */
     async hackerNewsStoriesShow(requestParameters: HackerNewsStoriesShowRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -398,7 +398,7 @@ export class HackerNewsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch current Hacker News top stories. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch current Hacker News top stories. Returns the normalized public contract.
      * Fetch current Hacker News top stories
      */
     async hackerNewsStoriesTopRaw(requestParameters: HackerNewsStoriesTopRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -433,7 +433,7 @@ export class HackerNewsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch current Hacker News top stories. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch current Hacker News top stories. Returns the normalized public contract.
      * Fetch current Hacker News top stories
      */
     async hackerNewsStoriesTop(requestParameters: HackerNewsStoriesTopRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -442,7 +442,7 @@ export class HackerNewsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch a public Hacker News user profile. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch a public Hacker News user profile. Returns the normalized public contract.
      * Fetch a public Hacker News user profile
      */
     async hackerNewsUserRaw(requestParameters: HackerNewsUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -476,7 +476,7 @@ export class HackerNewsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch a public Hacker News user profile. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Fetch a public Hacker News user profile. Returns the normalized public contract.
      * Fetch a public Hacker News user profile
      */
     async hackerNewsUser(requestParameters: HackerNewsUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {

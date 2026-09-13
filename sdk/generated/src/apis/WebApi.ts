@@ -93,7 +93,7 @@ export class WebApi extends runtime.BaseAPI {
     }
 
     /**
-     * Crawl same-origin links starting from a URL and return normalized page results. max_pages/max_depth are clamped server-side regardless of the requested value.
+     * Crawl same-origin links starting from a URL and return normalized page results. The service clamps max_pages/max_depth regardless of the requested value.
      * Crawl same-origin links from a URL
      */
     async webCrawlRaw(requestParameters: WebCrawlRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -139,7 +139,7 @@ export class WebApi extends runtime.BaseAPI {
     }
 
     /**
-     * Crawl same-origin links starting from a URL and return normalized page results. max_pages/max_depth are clamped server-side regardless of the requested value.
+     * Crawl same-origin links starting from a URL and return normalized page results. The service clamps max_pages/max_depth regardless of the requested value.
      * Crawl same-origin links from a URL
      */
     async webCrawl(requestParameters: WebCrawlRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -195,7 +195,7 @@ export class WebApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch one URL and return clean, main-content Markdown plus normalized metadata, links, and images. Backed by a privately deployed webclaw-server instance; upstream implementation details are never exposed.
+     * Fetch one URL and return clean, main-content Markdown plus normalized metadata, links, and images.
      * Fetch one URL as clean Markdown
      */
     async webScrapeRaw(requestParameters: WebScrapeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -241,7 +241,7 @@ export class WebApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch one URL and return clean, main-content Markdown plus normalized metadata, links, and images. Backed by a privately deployed webclaw-server instance; upstream implementation details are never exposed.
+     * Fetch one URL and return clean, main-content Markdown plus normalized metadata, links, and images.
      * Fetch one URL as clean Markdown
      */
     async webScrape(requestParameters: WebScrapeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {

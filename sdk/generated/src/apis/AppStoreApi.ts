@@ -85,7 +85,7 @@ export interface AppStoreSuggestRequest {
 export class AppStoreApi extends runtime.BaseAPI {
 
     /**
-     * Look up one public App Store application. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Look up one public App Store application. Returns the normalized public contract.
      * Look up one public App Store application
      */
     async appStoreAppRaw(requestParameters: AppStoreAppRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -132,7 +132,7 @@ export class AppStoreApi extends runtime.BaseAPI {
     }
 
     /**
-     * Look up one public App Store application. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Look up one public App Store application. Returns the normalized public contract.
      * Look up one public App Store application
      */
     async appStoreApp(requestParameters: AppStoreAppRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -141,7 +141,7 @@ export class AppStoreApi extends runtime.BaseAPI {
     }
 
     /**
-     * List applications by developer. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * List applications by developer. Returns the normalized public contract.
      * List applications by developer
      */
     async appStoreDeveloperRaw(requestParameters: AppStoreDeveloperRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -187,7 +187,7 @@ export class AppStoreApi extends runtime.BaseAPI {
     }
 
     /**
-     * List applications by developer. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * List applications by developer. Returns the normalized public contract.
      * List applications by developer
      */
     async appStoreDeveloper(requestParameters: AppStoreDeveloperRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -196,7 +196,7 @@ export class AppStoreApi extends runtime.BaseAPI {
     }
 
     /**
-     * List applications from an iTunes collection. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * List applications from an iTunes collection. Returns the normalized public contract.
      * List applications from an iTunes collection
      */
     async appStoreListRaw(requestParameters: AppStoreListRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -247,7 +247,7 @@ export class AppStoreApi extends runtime.BaseAPI {
     }
 
     /**
-     * List applications from an iTunes collection. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * List applications from an iTunes collection. Returns the normalized public contract.
      * List applications from an iTunes collection
      */
     async appStoreList(requestParameters: AppStoreListRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -256,7 +256,7 @@ export class AppStoreApi extends runtime.BaseAPI {
     }
 
     /**
-     * Read public App Store privacy details. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Read public App Store privacy details. Returns the normalized public contract.
      * Read public App Store privacy details
      */
     async appStorePrivacyRaw(requestParameters: AppStorePrivacyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -294,7 +294,7 @@ export class AppStoreApi extends runtime.BaseAPI {
     }
 
     /**
-     * Read public App Store privacy details. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Read public App Store privacy details. Returns the normalized public contract.
      * Read public App Store privacy details
      */
     async appStorePrivacy(requestParameters: AppStorePrivacyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -303,7 +303,7 @@ export class AppStoreApi extends runtime.BaseAPI {
     }
 
     /**
-     * Read public app ratings. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Read public app ratings. Returns the normalized public contract.
      * Read public app ratings
      */
     async appStoreRatingsRaw(requestParameters: AppStoreRatingsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -342,7 +342,7 @@ export class AppStoreApi extends runtime.BaseAPI {
     }
 
     /**
-     * Read public app ratings. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Read public app ratings. Returns the normalized public contract.
      * Read public app ratings
      */
     async appStoreRatings(requestParameters: AppStoreRatingsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -351,7 +351,7 @@ export class AppStoreApi extends runtime.BaseAPI {
     }
 
     /**
-     * Read a page of public app reviews. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Read a page of public app reviews. Returns the normalized public contract.
      * Read a page of public app reviews
      */
     async appStoreReviewsRaw(requestParameters: AppStoreReviewsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -398,7 +398,7 @@ export class AppStoreApi extends runtime.BaseAPI {
     }
 
     /**
-     * Read a page of public app reviews. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Read a page of public app reviews. Returns the normalized public contract.
      * Read a page of public app reviews
      */
     async appStoreReviews(requestParameters: AppStoreReviewsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -407,7 +407,7 @@ export class AppStoreApi extends runtime.BaseAPI {
     }
 
     /**
-     * Search public App Store applications by term. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Search public App Store applications by term. Returns the normalized public contract.
      * Search public App Store applications by term
      */
     async appStoreSearchRaw(requestParameters: AppStoreSearchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -465,7 +465,7 @@ export class AppStoreApi extends runtime.BaseAPI {
     }
 
     /**
-     * Search public App Store applications by term. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Search public App Store applications by term. Returns the normalized public contract.
      * Search public App Store applications by term
      */
     async appStoreSearch(requestParameters: AppStoreSearchRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -474,7 +474,7 @@ export class AppStoreApi extends runtime.BaseAPI {
     }
 
     /**
-     * List apps related to an application. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * List apps related to an application. Returns the normalized public contract.
      * List apps related to an application
      */
     async appStoreSimilarRaw(requestParameters: AppStoreSimilarRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -509,7 +509,7 @@ export class AppStoreApi extends runtime.BaseAPI {
     }
 
     /**
-     * List apps related to an application. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * List apps related to an application. Returns the normalized public contract.
      * List apps related to an application
      */
     async appStoreSimilar(requestParameters: AppStoreSimilarRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {
@@ -518,7 +518,7 @@ export class AppStoreApi extends runtime.BaseAPI {
     }
 
     /**
-     * Suggest public App Store search terms. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Suggest public App Store search terms. Returns the normalized public contract.
      * Suggest public App Store search terms
      */
     async appStoreSuggestRaw(requestParameters: AppStoreSuggestRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SuccessResponse>> {
@@ -556,7 +556,7 @@ export class AppStoreApi extends runtime.BaseAPI {
     }
 
     /**
-     * Suggest public App Store search terms. Returns the normalized public contract; raw provider records are internal to the runtime boundary and never cross the public gateway.
+     * Suggest public App Store search terms. Returns the normalized public contract.
      * Suggest public App Store search terms
      */
     async appStoreSuggest(requestParameters: AppStoreSuggestRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SuccessResponse> {

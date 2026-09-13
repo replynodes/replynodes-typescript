@@ -17,7 +17,7 @@ import {
   YoutubeTranscriptRequest,
 } from '../generated/src';
 
-export type { SuccessResponse } from '../generated/src';
+export type { CreditTopupRequired, PaymentRequired, PaymentRequiredResponse, SuccessResponse } from '../generated/src';
 export type { AppStoreReviewsRequest, AppStoreSearchRequest, GoogleSearchRequest, RedditSearchRequest, WebScrapeRequest, YoutubeCommentsRequest, YoutubeSearchRequest, YoutubeTranscriptRequest };
 
 export interface ReplyNodesOptions {
