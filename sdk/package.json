@@ -1,0 +1,17 @@
+{
+  "name": "@replynodes/sdk",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for the ReplyNodes public read-only API",
+  "type": "commonjs",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "files": ["dist", "generated", "README.md", "openapi-generator-config.json"],
+  "scripts": {
+    "generate": "docker run --rm -v \"$PWD/..:/local\" openapitools/openapi-generator-cli:v7.10.0 generate -i /local/openapi/replynodes-fetcher.openapi.json -g typescript-fetch -o /local/sdk/generated -c /local/sdk/openapi-generator-config.json --skip-validate-spec",
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test test/*.test.js"
+  },
+  "devDependencies": {
+    "typescript": "5.7.3"
+  }
+}
