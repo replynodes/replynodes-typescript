@@ -1,7 +1,30 @@
 {
   "name": "@replynodes/sdk",
   "version": "0.1.0",
-  "description": "TypeScript SDK for the ReplyNodes public read-only API",
+  "description": "Official TypeScript SDK for the ReplyNodes web context API — web scraping, Google Search, YouTube, Reddit and App Store APIs for software and AI agents.",
+  "keywords": [
+    "replynodes",
+    "typescript-sdk",
+    "javascript-sdk",
+    "ai-agents",
+    "web-context",
+    "web-scraping",
+    "web-scraping-api",
+    "google-search-api",
+    "youtube-api",
+    "reddit-api",
+    "app-store-api",
+    "llm",
+    "mcp"
+  ],
+  "homepage": "https://replynodes.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/replynodes/replynodes-typescript.git"
+  },
+  "bugs": {
+    "url": "https://github.com/replynodes/replynodes-typescript/issues"
+  },
   "type": "commonjs",
   "main": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
