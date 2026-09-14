@@ -1,6 +1,6 @@
 {
   "name": "@replynodes/sdk",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "TypeScript SDK for the ReplyNodes public read-only API",
   "type": "commonjs",
   "license": "MIT",

@@ -1,6 +1,6 @@
 {
   "npmName": "@replynodes/sdk",
-  "npmVersion": "0.2.0",
+  "npmVersion": "0.3.0",
   "supportsES6": true,
   "typescriptThreePlus": true,
   "useSingleRequestParameter": true,

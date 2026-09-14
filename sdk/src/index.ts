@@ -10,6 +10,7 @@ import {
   ResponseError,
   SuccessResponse,
   WebApi,
+  WebBrandRequest,
   WebScrapeRequest,
   YoutubeApi,
   YoutubeCommentsRequest,
@@ -18,7 +19,7 @@ import {
 } from '../generated/src';
 
 export type { CreditTopupRequired, PaymentRequired, PaymentRequiredResponse, SuccessResponse } from '../generated/src';
-export type { AppStoreReviewsRequest, AppStoreSearchRequest, GoogleSearchRequest, RedditSearchRequest, WebScrapeRequest, YoutubeCommentsRequest, YoutubeSearchRequest, YoutubeTranscriptRequest };
+export type { AppStoreReviewsRequest, AppStoreSearchRequest, GoogleSearchRequest, RedditSearchRequest, WebBrandRequest, WebScrapeRequest, YoutubeCommentsRequest, YoutubeSearchRequest, YoutubeTranscriptRequest };
 
 export interface ReplyNodesOptions {
   apiKey: string;
@@ -104,6 +105,7 @@ export function ReplyNodes(options: ReplyNodesOptions) {
   const web = new WebApi(configuration);
   const google = new GoogleApi(configuration);
   const appStore = new AppStoreApi(configuration);
+  const webSearch = (params: GoogleSearchRequest): Promise<SuccessResponse> => call((init) => google.googleSearch(params, init));
 
   return {
     youtube: {
@@ -115,10 +117,12 @@ export function ReplyNodes(options: ReplyNodesOptions) {
       search: (params: RedditSearchRequest): Promise<SuccessResponse> => call((init) => reddit.redditSearch(params, init)),
     },
     web: {
+      brand: (params: WebBrandRequest): Promise<SuccessResponse> => call((init) => web.webBrand(params, init)),
       scrape: (params: WebScrapeRequest): Promise<SuccessResponse> => call((init) => web.webScrape(params, init)),
+      search: webSearch,
     },
     google: {
-      search: (params: GoogleSearchRequest): Promise<SuccessResponse> => call((init) => google.googleSearch(params, init)),
+      search: webSearch,
     },
     appStore: {
       search: (params: AppStoreSearchRequest): Promise<SuccessResponse> => call((init) => appStore.appStoreSearch(params, init)),
