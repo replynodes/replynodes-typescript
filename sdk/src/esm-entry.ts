@@ -21,4 +21,4 @@ export type {
   YoutubeCommentsRequest,
   YoutubeSearchRequest,
   YoutubeTranscriptRequest,
-} from './index';
+} from '../dist/cjs/src/index.js';

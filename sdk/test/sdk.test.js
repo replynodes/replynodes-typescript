@@ -20,6 +20,29 @@ test('uses bearer auth and exposes intentional methods', async () => {
   } finally { global.fetch = originalFetch; }
 });
 
+test('accepts the official API and explicitly allowed local/test origins', () => {
+  for (const baseUrl of [
+    'https://api.replynodes.com',
+    'https://api.replynodes.com/v1',
+    'http://localhost:8787',
+    'https://test.invalid',
+  ]) {
+    assert.doesNotThrow(() => ReplyNodes({ apiKey: 'key', baseUrl }));
+  }
+});
+
+test('rejects untrusted baseUrl values before sending the bearer key', async () => {
+  const originalFetch = global.fetch;
+  let calls = 0;
+  global.fetch = async () => { calls++; return new Response('{}'); };
+  try {
+    for (const baseUrl of ['not-a-url', 'https://attacker.invalid', 'http://api.replynodes.com', 'https://api.replynodes.com.evil']) {
+      assert.throws(() => ReplyNodes({ apiKey: 'rn_secret', baseUrl }), /baseUrl/);
+    }
+    assert.equal(calls, 0);
+  } finally { global.fetch = originalFetch; }
+});
+
 test('preserves the missing success request ID contract without synthesizing one', async () => {
   const originalFetch = global.fetch;
   global.fetch = async () => new Response(JSON.stringify({ data: [], meta: {} }), { status: 200, headers: { 'content-type': 'application/json' } });

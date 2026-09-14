@@ -19,8 +19,16 @@ test('packed package supports CommonJS, ESM, named exports, and declarations', (
     assert.equal(cjs.toString(), '');
     execFileSync(process.execPath, ['--input-type=module', '-e', "import ReplyNodes, { ReplyNodesError } from '@replynodes/sdk'; if(typeof ReplyNodes !== 'function' || typeof ReplyNodesError !== 'function') process.exit(1);"], { cwd: consumer });
     const source = "import ReplyNodes, { ReplyNodesError, type ReplyNodesOptions } from '@replynodes/sdk'; const options: ReplyNodesOptions = { apiKey: 'test' }; const client = ReplyNodes(options); void client; void ReplyNodesError;";
-    fs.writeFileSync(path.join(consumer, 'index.ts'), source);
-    execFileSync(path.join(sdkDir, 'node_modules/.bin/tsc'), ['--noEmit', '--strict', '--module', 'NodeNext', '--moduleResolution', 'NodeNext', '--target', 'ES2022', path.join(consumer, 'index.ts')], { cwd: consumer, stdio: 'ignore' });
+    const declarationConsumer = path.join(consumer, 'index.mts');
+    fs.writeFileSync(declarationConsumer, source);
+    execFileSync(path.join(sdkDir, 'node_modules/.bin/tsc'), ['--noEmit', '--strict', '--module', 'NodeNext', '--moduleResolution', 'NodeNext', '--target', 'ES2022', declarationConsumer], { cwd: consumer, stdio: 'ignore' });
+
+    const packedFiles = execFileSync('tar', ['-tzf', path.join(temp, tarball)], { encoding: 'utf8' }).split('\n');
+    assert.ok(packedFiles.includes('package/dist/esm/src/esm-entry.d.ts'));
+    assert.ok(packedFiles.includes('package/dist/cjs/src/index.d.ts'));
+    assert.ok(!packedFiles.includes('package/generated/package.json'));
+    const esmDeclaration = fs.readFileSync(path.join(consumer, 'node_modules/@replynodes/sdk/dist/esm/src/esm-entry.d.ts'), 'utf8');
+    assert.match(esmDeclaration, /\.\.\/\.\.\/cjs\/src\/index\.js/);
   } finally {
     fs.rmSync(temp, { recursive: true, force: true });
   }
