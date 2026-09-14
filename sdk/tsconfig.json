@@ -6,10 +6,10 @@
     "moduleResolution": "node",
     "strict": true,
     "esModuleInterop": true,
-    "outDir": "dist",
+    "outDir": "dist/cjs",
     "rootDir": ".",
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "generated/src/**/*.ts"],
+  "include": ["src/index.ts", "generated/src/**/*.ts"],
   "exclude": ["dist", "node_modules"]
 }

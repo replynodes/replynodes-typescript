@@ -104,6 +104,8 @@ export function ReplyNodes(options: ReplyNodesOptions) {
   };
 }
 
+export default ReplyNodes;
+
 async function fetchWithTimeout(input: RequestInfo | URL, init?: RequestInit): Promise<Response> {
   return fetch(input, init);
 }
