@@ -51,11 +51,34 @@ export class ReplyNodesTimeoutError extends Error {
 
 type Call = <T>(operation: (init: RequestInit) => Promise<T>) => Promise<T>;
 
+const OFFICIAL_API_ORIGIN = 'https://api.replynodes.com';
+const SAFE_TEST_ORIGINS = new Set(['https://test.invalid']);
+
+function validateBaseUrl(baseUrl: string | undefined): string | undefined {
+  if (baseUrl === undefined) return undefined;
+
+  let url: URL;
+  try {
+    url = new URL(baseUrl);
+  } catch {
+    throw new Error('ReplyNodes baseUrl must be an absolute URL for an allowed ReplyNodes or test origin');
+  }
+
+  const isLocalTestOrigin = ['localhost', '127.0.0.1', '[::1]'].includes(url.hostname)
+    && (url.protocol === 'http:' || url.protocol === 'https:');
+  if (url.origin !== OFFICIAL_API_ORIGIN && !isLocalTestOrigin && !SAFE_TEST_ORIGINS.has(url.origin)) {
+    throw new Error('ReplyNodes baseUrl must use the official ReplyNodes API origin or an explicitly allowed test origin');
+  }
+
+  return url.toString().replace(/\/+$/, '');
+}
+
 export function ReplyNodes(options: ReplyNodesOptions) {
   if (!options.apiKey) throw new Error('ReplyNodes requires an apiKey');
   if (options.timeout !== undefined && (!Number.isFinite(options.timeout) || options.timeout <= 0)) {
     throw new Error('ReplyNodes timeout must be a positive number of milliseconds');
   }
+  const baseUrl = validateBaseUrl(options.baseUrl);
 
   const call: Call = async <T>(operation: (init: RequestInit) => Promise<T>) => {
     const controller = new AbortController();
@@ -72,7 +95,7 @@ export function ReplyNodes(options: ReplyNodesOptions) {
   };
 
   const configuration = new Configuration({
-    basePath: options.baseUrl?.replace(/\/+$/, ''),
+    basePath: baseUrl,
     accessToken: options.apiKey,
     fetchApi: (input, init) => fetchWithTimeout(input, init),
   });
@@ -103,6 +126,8 @@ export function ReplyNodes(options: ReplyNodesOptions) {
     },
   };
 }
+
+export default ReplyNodes;
 
 async function fetchWithTimeout(input: RequestInfo | URL, init?: RequestInit): Promise<Response> {
   return fetch(input, init);

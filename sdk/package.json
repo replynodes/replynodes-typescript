@@ -1,15 +1,40 @@
 {
   "name": "@replynodes/sdk",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "TypeScript SDK for the ReplyNodes public read-only API",
   "type": "commonjs",
-  "main": "./dist/src/index.js",
-  "types": "./dist/src/index.d.ts",
-  "files": ["dist", "generated", "README.md", "openapi-generator-config.json"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/replynodes/replynodes-typescript.git"
+  },
+  "homepage": "https://replynodes.com",
+  "bugs": {
+    "url": "https://github.com/replynodes/replynodes-typescript/issues"
+  },
+  "keywords": ["replynodes", "sdk", "rest", "api", "typescript", "fetch"],
+  "engines": { "node": ">=18" },
+  "main": "./dist/cjs/src/index.js",
+  "types": "./dist/cjs/src/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/src/esm-entry.d.ts",
+        "default": "./dist/esm/src/esm-entry.js"
+      },
+      "require": {
+        "types": "./dist/cjs/src/index.d.ts",
+        "default": "./dist/cjs/src/index.js"
+      }
+    }
+  },
+  "sideEffects": false,
+  "files": ["dist", "README.md", "openapi-generator-config.json"],
   "scripts": {
     "generate": "node scripts/project-public-openapi.js && docker run --rm --user \"$(id -u):$(id -g)\" -v \"$PWD/..:/local\" openapitools/openapi-generator-cli:v7.10.0 generate -i /local/sdk/.generated/replynodes-fetcher.public.openapi.json -g typescript-fetch -o /local/sdk/generated -c /local/sdk/openapi-generator-config.json --skip-validate-spec && find generated/src -type f -name '*.ts' -exec sed -i 's/[[:blank:]]*$//' {} +",
-    "build": "tsc -p tsconfig.json",
-    "test": "npm run build && node --test test/*.test.js"
+    "build": "rm -rf dist && tsc -p tsconfig.json && tsc -p tsconfig.esm.json && node scripts/write-esm-package.js",
+    "test": "npm run build && node --test test/*.test.js",
+    "pack:check": "npm pack --dry-run"
   },
   "devDependencies": {
     "typescript": "5.7.3"
