@@ -20,6 +20,40 @@ test('uses bearer auth and exposes intentional methods', async () => {
   } finally { global.fetch = originalFetch; }
 });
 
+test('exposes web brand and web search with the generated paths and query parameters', async () => {
+  const calls = [];
+  const originalFetch = global.fetch;
+  global.fetch = async (url, init) => {
+    calls.push({ url: String(url), init });
+    return new Response(JSON.stringify({ data: [], meta: { request_id: 'req_web' } }), {
+      status: 200,
+      headers: { 'content-type': 'application/json' },
+    });
+  };
+  try {
+    const client = ReplyNodes({ apiKey: 'key', baseUrl: 'https://test.invalid' });
+    assert.equal(client.google.search, client.web.search);
+
+    const brand = await client.web.brand({ url: 'https://example.com/brand page' });
+    assert.equal(brand.meta.request_id, 'req_web');
+    assert.equal(calls[0].url, 'https://test.invalid/v1/webcontext/brand?url=https%3A%2F%2Fexample.com%2Fbrand%20page');
+
+    await client.web.search({
+      text: 'reply nodes',
+      engines: 'google,bing',
+      lang: 'en',
+      region: 'us',
+      date: '2025-01-01',
+      site: 'example.com',
+      limit: 10,
+      start: 20,
+      cursor: 'next page',
+    });
+    assert.equal(calls[1].url, 'https://test.invalid/v1/web/search?text=reply%20nodes&engines=google%2Cbing&lang=en&region=us&date=2025-01-01&site=example.com&limit=10&start=20&cursor=next%20page');
+    assert.equal(calls[1].init.headers.Authorization, 'Bearer key');
+  } finally { global.fetch = originalFetch; }
+});
+
 test('accepts the official API and explicitly allowed local/test origins', () => {
   for (const baseUrl of [
     'https://api.replynodes.com',

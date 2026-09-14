@@ -1,4 +1,4 @@
-# @replynodes/sdk 0.2.0
+# @replynodes/sdk 0.3.0
 
 One small TypeScript package for the authenticated, public ReplyNodes read API. The generated `typescript-fetch` client is kept under `generated/`; `src/` is the stable, intentionally narrow developer-facing wrapper.
 
@@ -23,9 +23,9 @@ console.log(result.meta.request_id);
 
 The API key is the raw `rn_test_...` or `rn_live_...` value. The SDK adds `Authorization: Bearer ...`; do not include the `Bearer ` prefix yourself. `baseUrl` can override the production URL for tests or compatible gateways.
 
-The repository-level `examples/quickstart.js` and `examples/quickstart.ts` are intentionally retained as lightweight documentation for both module styles; they are not included in the published package and are outside the SDK build.
+The repository-level `examples/quickstart.js`, `examples/quickstart.ts`, `examples/web-search.mjs`, and `examples/brand-info.mjs` are runnable documentation; they are not included in the published package and are outside the SDK build.
 
-Available methods are `youtube.search`, `youtube.comments`, `youtube.transcript`, `reddit.search`, `web.scrape`, `google.search`, `appStore.search`, and `appStore.reviews`. `googleNews` is not exposed because the vendored contract has no Google News route. Responses contain normalized `data` and `meta`; use `meta.request_id` for support and `meta.next_cursor`/`meta.has_more` when returned by an operation. The SDK does not automatically paginate or retry requests.
+Available methods are `youtube.search`, `youtube.comments`, `youtube.transcript`, `reddit.search`, `web.brand`, `web.scrape`, `web.search`, `google.search` (backward-compatible alias for `web.search`), `appStore.search`, and `appStore.reviews`. `googleNews` is not exposed because the vendored contract has no Google News route. Responses contain normalized `data` and `meta`; use `meta.request_id` for support and `meta.next_cursor`/`meta.has_more` when returned by an operation. The SDK does not automatically paginate or retry requests.
 
 Errors are `ReplyNodesError` with `status`, `code`, `requestId`, and parsed `details`. `401` means authentication failed; `402` means payment or account credits are required; other HTTP errors retain their status and request ID. A client-side deadline throws `ReplyNodesTimeoutError`. Set `timeout` in milliseconds; omit it to use the platform fetch behavior.
 

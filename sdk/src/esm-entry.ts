@@ -17,6 +17,7 @@ export type {
   AppStoreSearchRequest,
   GoogleSearchRequest,
   RedditSearchRequest,
+  WebBrandRequest,
   WebScrapeRequest,
   YoutubeCommentsRequest,
   YoutubeSearchRequest,
