@@ -35,13 +35,11 @@ Request IDs are backend-owned. Successful responses expose `meta.request_id` exa
 
 The SDK follows SemVer: patch releases contain backwards-compatible fixes, minor releases add backwards-compatible APIs, and major releases may change or remove public behavior. `@replynodes/sdk` is the typed REST client for direct API calls. `@replynodes/mcp` is a separate agent bridge with MCP tools and lifecycle concerns; it is not a layer of this SDK and the two packages are versioned and operated independently.
 
-To transfer or manage this package under the official ReplyNodes npm organization/account, an npm owner with access should run:
-
-```sh
-npm owner add replynodes @replynodes/sdk
-npm owner ls @replynodes/sdk
-npm dist-tag ls @replynodes/sdk
-```
+Releases are published by `.github/workflows/npm-publish.yml` using npm
+Trusted Publishing (OIDC) — no long-lived npm token is stored in this
+repository. See [`RELEASE.md`](../RELEASE.md) for the release process, the
+current npm ownership state, and the manual npm admin steps required to
+finish migrating ownership away from a single personal account.
 
 From a clean environment, verify the published package with `npm pack @replynodes/sdk@latest`, inspect the tarball, install it in a fresh temporary project, and run both `node -e "const sdk=require('@replynodes/sdk'); console.log(typeof sdk.ReplyNodes)"` and an ESM import/default plus TypeScript declaration check. The release manager should confirm the maintainers and `latest` dist-tag before publishing.
 

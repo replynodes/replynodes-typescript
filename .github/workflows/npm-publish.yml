@@ -1,0 +1,76 @@
+name: npm publish
+
+# Publishes @replynodes/sdk using npm Trusted Publishing (OIDC).
+#
+# No long-lived npm token is used or required. Authentication to the npm
+# registry is granted per-run through a GitHub Actions OIDC token that npm
+# exchanges for a short-lived publish credential. This requires a one-time,
+# manual bootstrap in the npm package settings UI (see RELEASE.md) that links
+# this exact repository, workflow file, and environment as a Trusted
+# Publisher for @replynodes/sdk. That bootstrap step cannot be performed from
+# this workflow or from a non-interactive environment.
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      confirm_version:
+        description: "Version in sdk/package.json this run must publish (safety check)"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: Build, test, and publish
+    runs-on: ubuntu-latest
+    environment: npm-publish
+    permissions:
+      contents: read
+      id-token: write
+    defaults:
+      run:
+        working-directory: sdk
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Require npm with Trusted Publishing support
+        run: |
+          set -euo pipefail
+          npm install -g npm@^11.5.1
+          npm --version
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check declared version matches trigger
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          set -euo pipefail
+          declared="$(node -p "require('./package.json').version")"
+          if [[ "$declared" != "${{ inputs.confirm_version }}" ]]; then
+            echo "::error::sdk/package.json version ($declared) does not match confirm_version input (${{ inputs.confirm_version }})" >&2
+            exit 1
+          fi
+
+      - name: Build
+        run: npm run build
+
+      - name: Verify public surface coverage
+        run: npm run check:surface
+
+      - name: Test
+        run: node --test --test-concurrency=1 test/*.test.js
+
+      - name: Pack dry run
+        run: npm run pack:check
+
+      - name: Publish with provenance
+        run: npm publish --provenance --access public
