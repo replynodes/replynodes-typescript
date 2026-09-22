@@ -1,6 +1,6 @@
 # @replynodes/sdk 0.3.0
 
-One small TypeScript package for the authenticated, public ReplyNodes read API. The generated `typescript-fetch` client is kept under `generated/`; `src/` is the stable, intentionally narrow developer-facing wrapper.
+One small TypeScript package for the authenticated, public ReplyNodes read API. The generated `typescript-fetch` client is kept under `generated/`; `src/` is the stable developer-facing wrapper and deterministic operation registry.
 
 ## Install and quickstart
 
@@ -25,7 +25,7 @@ The API key is the raw `rn_test_...` or `rn_live_...` value. The SDK adds `Autho
 
 The repository-level `examples/quickstart.js`, `examples/quickstart.ts`, `examples/web-search.mjs`, and `examples/brand-info.mjs` are runnable documentation; they are not included in the published package and are outside the SDK build.
 
-Available methods are `youtube.search`, `youtube.comments`, `youtube.transcript`, `reddit.search`, `web.brand`, `web.scrape`, `web.search`, `google.search` (backward-compatible alias for `web.search`), `appStore.search`, and `appStore.reviews`. `googleNews` is not exposed because the vendored contract has no Google News route. Responses contain normalized `data` and `meta`; use `meta.request_id` for support and `meta.next_cursor`/`meta.has_more` when returned by an operation. The SDK does not automatically paginate or retry requests.
+The wrapper exposes all 77 canonical operations through resource-oriented namespaces: `appStore`, `brand`, `fomo`, `google`, `googleMaps`, `googlePlay`, `googleShopping`, `hackerNews`, `instagram`, `reddit`, `tiktok`, `web`, and `youtube`. Each namespace uses intentional action names matching the operation registry; `web.search` and `google.search` are backward-compatible aliases. `PUBLIC_OPERATION_REGISTRY` is exported for deterministic surface checks. Responses contain normalized `data` and `meta`; use `meta.request_id` for support and `meta.next_cursor`/`meta.has_more` when returned by an operation. The SDK does not automatically paginate or retry requests.
 
 Errors are `ReplyNodesError` with `status`, `code`, `requestId`, and parsed `details`. `401` means authentication failed; `402` means payment or account credits are required; other HTTP errors retain their status and request ID. A client-side deadline throws `ReplyNodesTimeoutError`. Set `timeout` in milliseconds; omit it to use the platform fetch behavior.
 
@@ -47,7 +47,7 @@ From a clean environment, verify the published package with `npm pack @replynode
 
 ## Local generation and verification
 
-The canonical, vendored input is `../openapi/replynodes-fetcher.openapi.json`. Its SHA-256 is `6f403c37eea6561e500f6292f435fbc2a544152415ea0c17f0c6ed4e58281b46`.
+The canonical, vendored input is `../openapi/replynodes-fetcher.openapi.json`. Its SHA-256 is `46e5807e5164904e31dbdc7a14a61f87ffbe0a4617c076066c8685de8d5e6edf`.
 
 Generation is pinned to OpenAPI Generator `v7.10.0`:
 
@@ -55,5 +55,9 @@ Generation is pinned to OpenAPI Generator `v7.10.0`:
 npm run generate
 npm test
 ```
+
+`npm run check:surface` verifies the compiled wrapper against all canonical GET
+operation IDs without making network requests. `npm test` runs this check after
+the build before the existing test suite.
 
 `npm run generate` uses the official Docker image and `openapi-generator-config.json`; it writes only to `generated/`. The generated client contains the public SDK contract only.

@@ -14,7 +14,10 @@ test('packed package supports CommonJS, ESM, named exports, and declarations', (
     const consumer = path.join(temp, 'consumer');
     fs.mkdirSync(consumer);
     execFileSync('npm', ['init', '-y'], { cwd: consumer, stdio: 'ignore' });
-    execFileSync('npm', ['install', '--ignore-scripts', path.join(temp, tarball)], { cwd: consumer, stdio: 'ignore' });
+    const childEnvironment = { ...process.env };
+    delete childEnvironment.npm_config_allow_scripts;
+    delete childEnvironment.NPM_CONFIG_ALLOW_SCRIPTS;
+    execFileSync('npm', ['install', '--ignore-scripts', path.join(temp, tarball)], { cwd: consumer, env: childEnvironment, stdio: 'ignore' });
     const cjs = execFileSync(process.execPath, ['-e', "const sdk=require('@replynodes/sdk'); if(typeof sdk.ReplyNodes !== 'function') process.exit(1); if(typeof sdk.default !== 'function') process.exit(1);"], { cwd: consumer });
     assert.equal(cjs.toString(), '');
     execFileSync(process.execPath, ['--input-type=module', '-e', "import ReplyNodes, { ReplyNodesError } from '@replynodes/sdk'; if(typeof ReplyNodes !== 'function' || typeof ReplyNodesError !== 'function') process.exit(1);"], { cwd: consumer });

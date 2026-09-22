@@ -3,6 +3,7 @@
 README.md
 package.json
 src/apis/AppStoreApi.ts
+src/apis/BrandApi.ts
 src/apis/FomoApi.ts
 src/apis/GoogleApi.ts
 src/apis/GoogleMapsApi.ts
