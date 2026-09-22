@@ -167,6 +167,12 @@ export type PublicOperationId = RegistryValues<RegistryResource>;
 
 type GeneratedApi = Record<string, (requestParameters: object, initOverrides?: RequestInit) => Promise<unknown>>;
 type Call = <T>(operation: (init: RequestInit) => Promise<T>) => Promise<T>;
+type RequiredKeys<T> = {
+  [Key in keyof T]-?: {} extends Pick<T, Key> ? never : Key;
+}[keyof T];
+type RequestArguments<TRequest extends object> = [RequiredKeys<TRequest>] extends [never]
+  ? [params?: TRequest]
+  : [params: TRequest];
 
 const OFFICIAL_API_ORIGIN = 'https://api.replynodes.com';
 const SAFE_TEST_ORIGINS = new Set(['https://test.invalid']);
@@ -237,8 +243,11 @@ export function ReplyNodes(options: ReplyNodesOptions) {
     if (!api) throw new Error(`ReplyNodes generated client is missing operation ${operationId}`);
     return api[operationId].call(api, params, init) as Promise<TResponse>;
   };
-  const bind = <TRequest extends object, TResponse>(operationId: PublicOperationId) => (params: TRequest): Promise<TResponse> =>
-    call((init) => invokeOperation<TResponse>(operationId, params, init));
+  const bind = <TRequest extends object, TResponse>(operationId: PublicOperationId) =>
+    (...args: RequestArguments<TRequest>): Promise<TResponse> => {
+      const [params] = args;
+      return call((init) => invokeOperation<TResponse>(operationId, params ?? {}, init));
+    };
 
   const webSearch = bind<Generated.GoogleSearchRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.google.search);
 
