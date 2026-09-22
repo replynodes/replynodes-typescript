@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * from './AppStoreApi';
+export * from './BrandApi';
 export * from './FomoApi';
 export * from './GoogleApi';
 export * from './GoogleMapsApi';

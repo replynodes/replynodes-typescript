@@ -17,7 +17,7 @@ function project() {
 
 test('canonical OpenAPI provenance SHA is unchanged', () => {
   const sha = crypto.createHash('sha256').update(fs.readFileSync(canonicalPath)).digest('hex');
-  assert.equal(sha, '6f403c37eea6561e500f6292f435fbc2a544152415ea0c17f0c6ed4e58281b46');
+  assert.equal(sha, '46e5807e5164904e31dbdc7a14a61f87ffbe0a4617c076066c8685de8d5e6edf');
 });
 
 test('public projection is deterministic and has no private implementation terms', () => {

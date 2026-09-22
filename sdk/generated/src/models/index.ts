@@ -3,6 +3,62 @@
 /**
  *
  * @export
+ * @interface BrandFontsData
+ */
+export interface BrandFontsData {
+    /**
+     *
+     * @type {string}
+     * @memberof BrandFontsData
+     */
+    domain: string;
+    /**
+     *
+     * @type {string}
+     * @memberof BrandFontsData
+     */
+    url: string;
+    /**
+     *
+     * @type {number}
+     * @memberof BrandFontsData
+     */
+    count: number;
+    /**
+     * Word count reported by the rendered page metadata, when available.
+     * @type {number}
+     * @memberof BrandFontsData
+     */
+    words_count?: number;
+    /**
+     *
+     * @type {Array<{ [key: string]: any; }>}
+     * @memberof BrandFontsData
+     */
+    fonts?: Array<{ [key: string]: any; }>;
+}
+/**
+ *
+ * @export
+ * @interface BrandFontsResponse
+ */
+export interface BrandFontsResponse {
+    /**
+     *
+     * @type {BrandFontsData}
+     * @memberof BrandFontsResponse
+     */
+    data: BrandFontsData;
+    /**
+     *
+     * @type {ResponseMeta}
+     * @memberof BrandFontsResponse
+     */
+    meta: ResponseMeta;
+}
+/**
+ *
+ * @export
  * @interface CreditTopupRequired
  */
 export interface CreditTopupRequired {

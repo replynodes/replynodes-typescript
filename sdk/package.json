@@ -47,7 +47,8 @@
   "scripts": {
     "generate": "node scripts/project-public-openapi.js && docker run --rm --user \"$(id -u):$(id -g)\" -v \"$PWD/..:/local\" openapitools/openapi-generator-cli:v7.10.0 generate -i /local/sdk/.generated/replynodes-fetcher.public.openapi.json -g typescript-fetch -o /local/sdk/generated -c /local/sdk/openapi-generator-config.json --skip-validate-spec && find generated/src -type f -name '*.ts' -exec sed -i 's/[[:blank:]]*$//' {} +",
     "build": "rm -rf dist && tsc -p tsconfig.json && tsc -p tsconfig.esm.json && node scripts/write-esm-package.js",
-    "test": "npm run build && node --test test/*.test.js",
+    "check:surface": "node scripts/check-surface-coverage.js",
+    "test": "npm run build && npm run check:surface && node --test --test-concurrency=1 test/*.test.js",
     "pack:check": "npm pack --dry-run"
   },
   "devDependencies": {

@@ -1,25 +1,24 @@
 import {
   AppStoreApi,
-  AppStoreReviewsRequest,
-  AppStoreSearchRequest,
+  BrandApi,
   Configuration,
+  FomoApi,
   GoogleApi,
-  GoogleSearchRequest,
+  GoogleMapsApi,
+  GooglePlayApi,
+  GoogleShoppingApi,
+  HackerNewsApi,
+  InstagramApi,
   RedditApi,
-  RedditSearchRequest,
   ResponseError,
-  SuccessResponse,
+  TiktokApi,
   WebApi,
-  WebBrandRequest,
-  WebScrapeRequest,
   YoutubeApi,
-  YoutubeCommentsRequest,
-  YoutubeSearchRequest,
-  YoutubeTranscriptRequest,
 } from '../generated/src';
+import type * as Generated from '../generated/src';
 
+export type * from '../generated/src';
 export type { CreditTopupRequired, PaymentRequired, PaymentRequiredResponse, SuccessResponse } from '../generated/src';
-export type { AppStoreReviewsRequest, AppStoreSearchRequest, GoogleSearchRequest, RedditSearchRequest, WebBrandRequest, WebScrapeRequest, YoutubeCommentsRequest, YoutubeSearchRequest, YoutubeTranscriptRequest };
 
 export interface ReplyNodesOptions {
   apiKey: string;
@@ -50,6 +49,123 @@ export class ReplyNodesTimeoutError extends Error {
   }
 }
 
+/**
+ * The intentional public name for every canonical operation. The values are
+ * generated operation IDs; the wrapper below never constructs HTTP requests.
+ * `web.search` and `google.search` are compatibility aliases for one route.
+ */
+export const PUBLIC_OPERATION_REGISTRY = {
+  appStore: {
+    app: 'appStoreApp',
+    developer: 'appStoreDeveloper',
+    list: 'appStoreList',
+    privacy: 'appStorePrivacy',
+    ratings: 'appStoreRatings',
+    reviews: 'appStoreReviews',
+    search: 'appStoreSearch',
+    similar: 'appStoreSimilar',
+    suggest: 'appStoreSuggest',
+  },
+  brand: {
+    fonts: 'brandFonts',
+    retrieve: 'brandRetrieve',
+    search: 'brandSearch',
+    styleguide: 'brandStyleguide',
+  },
+  fomo: {
+    alerts: 'fomoAlerts',
+    leaderboard: 'fomoLeaderboard',
+    notifications: 'fomoNotifications',
+    search: 'fomoSearch',
+    thesis: 'fomoThesis',
+    thesisByToken: 'fomoThesisByToken',
+    thesisByUser: 'fomoThesisByUser',
+    thesisByUserToken: 'fomoThesisByUserToken',
+    tokenHolders: 'fomoTokenHolders',
+    tokensGraduated: 'fomoTokensGraduated',
+    tokensMostHeld: 'fomoTokensMostHeld',
+    tokensTrending: 'fomoTokensTrending',
+    trade: 'fomoTrade',
+    userBalances: 'fomoUserBalances',
+    userProfile: 'fomoUserProfile',
+    userTrades: 'fomoUserTrades',
+  },
+  google: {
+    search: 'googleSearch',
+  },
+  googleMaps: {
+    placeDetails: 'googleMapsPlaceDetails',
+    placeReviews: 'googleMapsPlaceReviews',
+    searchPlaces: 'googleMapsSearchPlaces',
+  },
+  googlePlay: {
+    appDetails: 'googlePlayAppDetails',
+    availability: 'googlePlayAvailability',
+    categories: 'googlePlayCategories',
+    categoryApps: 'googlePlayCategoryApps',
+    dataSafety: 'googlePlayDataSafety',
+    developer: 'googlePlayDeveloper',
+    permissions: 'googlePlayPermissions',
+    reviews: 'googlePlayReviews',
+    search: 'googlePlaySearch',
+    similarApps: 'googlePlaySimilarApps',
+    suggest: 'googlePlaySuggest',
+  },
+  googleShopping: {
+    productOffers: 'googleShoppingProductOffers',
+    search: 'googleShoppingSearch',
+  },
+  hackerNews: {
+    item: 'hackerNewsItem',
+    search: 'hackerNewsSearch',
+    storiesAsk: 'hackerNewsStoriesAsk',
+    storiesBest: 'hackerNewsStoriesBest',
+    storiesJob: 'hackerNewsStoriesJob',
+    storiesNew: 'hackerNewsStoriesNew',
+    storiesShow: 'hackerNewsStoriesShow',
+    storiesTop: 'hackerNewsStoriesTop',
+    user: 'hackerNewsUser',
+  },
+  instagram: {
+    posts: 'instagramPosts',
+    profile: 'instagramProfile',
+  },
+  reddit: {
+    postById: 'redditPostById',
+    postByPermalink: 'redditPostByPermalink',
+    search: 'redditSearch',
+    subredditPosts: 'redditSubredditPosts',
+    userActivity: 'redditUserActivity',
+    userPosts: 'redditUserPosts',
+  },
+  tiktok: {
+    post: 'tiktokPost',
+    user: 'tiktokUser',
+    userPosts: 'tiktokUserPosts',
+  },
+  web: {
+    brand: 'webBrand',
+    crawl: 'webCrawl',
+    map: 'webMap',
+    scrape: 'webScrape',
+    search: 'googleSearch',
+  },
+  youtube: {
+    channel: 'youtubeChannel',
+    comments: 'youtubeComments',
+    playlist: 'youtubePlaylist',
+    related: 'youtubeRelated',
+    search: 'youtubeSearch',
+    transcript: 'youtubeTranscript',
+    video: 'youtubeVideo',
+  },
+} as const;
+
+type RegistryResource = typeof PUBLIC_OPERATION_REGISTRY[keyof typeof PUBLIC_OPERATION_REGISTRY];
+type RegistryValues<T> = T extends Record<string, infer TValue> ? TValue : never;
+export type PublicOperationId = RegistryValues<RegistryResource>;
+
+type GeneratedApi = Record<string, (requestParameters: object, initOverrides?: RequestInit) => Promise<unknown>>;
 type Call = <T>(operation: (init: RequestInit) => Promise<T>) => Promise<T>;
 
 const OFFICIAL_API_ORIGIN = 'https://api.replynodes.com';
@@ -100,33 +216,134 @@ export function ReplyNodes(options: ReplyNodesOptions) {
     accessToken: options.apiKey,
     fetchApi: (input, init) => fetchWithTimeout(input, init),
   });
-  const youtube = new YoutubeApi(configuration);
-  const reddit = new RedditApi(configuration);
-  const web = new WebApi(configuration);
-  const google = new GoogleApi(configuration);
-  const appStore = new AppStoreApi(configuration);
-  const webSearch = (params: GoogleSearchRequest): Promise<SuccessResponse> => call((init) => google.googleSearch(params, init));
+  const generatedApis: GeneratedApi[] = [
+    new AppStoreApi(configuration) as unknown as GeneratedApi,
+    new BrandApi(configuration) as unknown as GeneratedApi,
+    new FomoApi(configuration) as unknown as GeneratedApi,
+    new GoogleApi(configuration) as unknown as GeneratedApi,
+    new GoogleMapsApi(configuration) as unknown as GeneratedApi,
+    new GooglePlayApi(configuration) as unknown as GeneratedApi,
+    new GoogleShoppingApi(configuration) as unknown as GeneratedApi,
+    new HackerNewsApi(configuration) as unknown as GeneratedApi,
+    new InstagramApi(configuration) as unknown as GeneratedApi,
+    new RedditApi(configuration) as unknown as GeneratedApi,
+    new TiktokApi(configuration) as unknown as GeneratedApi,
+    new WebApi(configuration) as unknown as GeneratedApi,
+    new YoutubeApi(configuration) as unknown as GeneratedApi,
+  ];
+
+  const invokeOperation = <TResponse>(operationId: PublicOperationId, params: object, init: RequestInit) => {
+    const api = generatedApis.find((candidate) => typeof candidate[operationId] === 'function');
+    if (!api) throw new Error(`ReplyNodes generated client is missing operation ${operationId}`);
+    return api[operationId].call(api, params, init) as Promise<TResponse>;
+  };
+  const bind = <TRequest extends object, TResponse>(operationId: PublicOperationId) => (params: TRequest): Promise<TResponse> =>
+    call((init) => invokeOperation<TResponse>(operationId, params, init));
+
+  const webSearch = bind<Generated.GoogleSearchRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.google.search);
 
   return {
-    youtube: {
-      search: (params: YoutubeSearchRequest): Promise<SuccessResponse> => call((init) => youtube.youtubeSearch(params, init)),
-      comments: (params: YoutubeCommentsRequest): Promise<SuccessResponse> => call((init) => youtube.youtubeComments(params, init)),
-      transcript: (params: YoutubeTranscriptRequest): Promise<SuccessResponse> => call((init) => youtube.youtubeTranscript(params, init)),
+    appStore: {
+      app: bind<Generated.AppStoreAppRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.appStore.app),
+      developer: bind<Generated.AppStoreDeveloperRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.appStore.developer),
+      list: bind<Generated.AppStoreListRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.appStore.list),
+      privacy: bind<Generated.AppStorePrivacyRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.appStore.privacy),
+      ratings: bind<Generated.AppStoreRatingsRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.appStore.ratings),
+      reviews: bind<Generated.AppStoreReviewsRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.appStore.reviews),
+      search: bind<Generated.AppStoreSearchRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.appStore.search),
+      similar: bind<Generated.AppStoreSimilarRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.appStore.similar),
+      suggest: bind<Generated.AppStoreSuggestRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.appStore.suggest),
+    },
+    brand: {
+      fonts: bind<Generated.BrandFontsRequest, Generated.BrandFontsResponse>(PUBLIC_OPERATION_REGISTRY.brand.fonts),
+      retrieve: bind<Generated.BrandRetrieveRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.brand.retrieve),
+      search: bind<Generated.BrandSearchRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.brand.search),
+      styleguide: bind<Generated.BrandStyleguideRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.brand.styleguide),
+    },
+    fomo: {
+      alerts: bind<Generated.FomoAlertsRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.fomo.alerts),
+      leaderboard: bind<Generated.FomoLeaderboardRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.fomo.leaderboard),
+      notifications: bind<Generated.FomoNotificationsRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.fomo.notifications),
+      search: bind<Generated.FomoSearchRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.fomo.search),
+      thesis: bind<Generated.FomoThesisRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.fomo.thesis),
+      thesisByToken: bind<Generated.FomoThesisByTokenRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.fomo.thesisByToken),
+      thesisByUser: bind<Generated.FomoThesisByUserRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.fomo.thesisByUser),
+      thesisByUserToken: bind<Generated.FomoThesisByUserTokenRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.fomo.thesisByUserToken),
+      tokenHolders: bind<Generated.FomoTokenHoldersRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.fomo.tokenHolders),
+      tokensGraduated: bind<Generated.FomoTokensGraduatedRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.fomo.tokensGraduated),
+      tokensMostHeld: bind<Generated.FomoTokensMostHeldRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.fomo.tokensMostHeld),
+      tokensTrending: bind<Generated.FomoTokensTrendingRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.fomo.tokensTrending),
+      trade: bind<Generated.FomoTradeRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.fomo.trade),
+      userBalances: bind<Generated.FomoUserBalancesRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.fomo.userBalances),
+      userProfile: bind<Generated.FomoUserProfileRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.fomo.userProfile),
+      userTrades: bind<Generated.FomoUserTradesRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.fomo.userTrades),
+    },
+    google: { search: webSearch },
+    googleMaps: {
+      placeDetails: bind<Generated.GoogleMapsPlaceDetailsRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.googleMaps.placeDetails),
+      placeReviews: bind<Generated.GoogleMapsPlaceReviewsRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.googleMaps.placeReviews),
+      searchPlaces: bind<Generated.GoogleMapsSearchPlacesRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.googleMaps.searchPlaces),
+    },
+    googlePlay: {
+      appDetails: bind<Generated.GooglePlayAppDetailsRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.googlePlay.appDetails),
+      availability: bind<Generated.GooglePlayAvailabilityRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.googlePlay.availability),
+      categories: bind<Generated.GooglePlayCategoriesRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.googlePlay.categories),
+      categoryApps: bind<Generated.GooglePlayCategoryAppsRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.googlePlay.categoryApps),
+      dataSafety: bind<Generated.GooglePlayDataSafetyRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.googlePlay.dataSafety),
+      developer: bind<Generated.GooglePlayDeveloperRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.googlePlay.developer),
+      permissions: bind<Generated.GooglePlayPermissionsRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.googlePlay.permissions),
+      reviews: bind<Generated.GooglePlayReviewsRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.googlePlay.reviews),
+      search: bind<Generated.GooglePlaySearchRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.googlePlay.search),
+      similarApps: bind<Generated.GooglePlaySimilarAppsRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.googlePlay.similarApps),
+      suggest: bind<Generated.GooglePlaySuggestRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.googlePlay.suggest),
+    },
+    googleShopping: {
+      productOffers: bind<Generated.GoogleShoppingProductOffersRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.googleShopping.productOffers),
+      search: bind<Generated.GoogleShoppingSearchRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.googleShopping.search),
+    },
+    hackerNews: {
+      item: bind<Generated.HackerNewsItemRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.hackerNews.item),
+      search: bind<Generated.HackerNewsSearchRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.hackerNews.search),
+      storiesAsk: bind<Generated.HackerNewsStoriesAskRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.hackerNews.storiesAsk),
+      storiesBest: bind<Generated.HackerNewsStoriesBestRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.hackerNews.storiesBest),
+      storiesJob: bind<Generated.HackerNewsStoriesJobRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.hackerNews.storiesJob),
+      storiesNew: bind<Generated.HackerNewsStoriesNewRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.hackerNews.storiesNew),
+      storiesShow: bind<Generated.HackerNewsStoriesShowRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.hackerNews.storiesShow),
+      storiesTop: bind<Generated.HackerNewsStoriesTopRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.hackerNews.storiesTop),
+      user: bind<Generated.HackerNewsUserRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.hackerNews.user),
+    },
+    instagram: {
+      posts: bind<Generated.InstagramPostsRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.instagram.posts),
+      profile: bind<Generated.InstagramProfileRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.instagram.profile),
     },
     reddit: {
-      search: (params: RedditSearchRequest): Promise<SuccessResponse> => call((init) => reddit.redditSearch(params, init)),
+      postById: bind<Generated.RedditPostByIdRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.reddit.postById),
+      postByPermalink: bind<Generated.RedditPostByPermalinkRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.reddit.postByPermalink),
+      search: bind<Generated.RedditSearchRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.reddit.search),
+      subredditPosts: bind<Generated.RedditSubredditPostsRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.reddit.subredditPosts),
+      userActivity: bind<Generated.RedditUserActivityRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.reddit.userActivity),
+      userPosts: bind<Generated.RedditUserPostsRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.reddit.userPosts),
+    },
+    tiktok: {
+      post: bind<Generated.TiktokPostRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.tiktok.post),
+      user: bind<Generated.TiktokUserRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.tiktok.user),
+      userPosts: bind<Generated.TiktokUserPostsRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.tiktok.userPosts),
     },
     web: {
-      brand: (params: WebBrandRequest): Promise<SuccessResponse> => call((init) => web.webBrand(params, init)),
-      scrape: (params: WebScrapeRequest): Promise<SuccessResponse> => call((init) => web.webScrape(params, init)),
+      brand: bind<Generated.WebBrandRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.web.brand),
+      crawl: bind<Generated.WebCrawlRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.web.crawl),
+      map: bind<Generated.WebMapRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.web.map),
+      scrape: bind<Generated.WebScrapeRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.web.scrape),
       search: webSearch,
     },
-    google: {
-      search: webSearch,
-    },
-    appStore: {
-      search: (params: AppStoreSearchRequest): Promise<SuccessResponse> => call((init) => appStore.appStoreSearch(params, init)),
-      reviews: (params: AppStoreReviewsRequest): Promise<SuccessResponse> => call((init) => appStore.appStoreReviews(params, init)),
+    youtube: {
+      channel: bind<Generated.YoutubeChannelRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.youtube.channel),
+      comments: bind<Generated.YoutubeCommentsRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.youtube.comments),
+      playlist: bind<Generated.YoutubePlaylistRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.youtube.playlist),
+      related: bind<Generated.YoutubeRelatedRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.youtube.related),
+      search: bind<Generated.YoutubeSearchRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.youtube.search),
+      transcript: bind<Generated.YoutubeTranscriptRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.youtube.transcript),
+      video: bind<Generated.YoutubeVideoRequest, Generated.SuccessResponse>(PUBLIC_OPERATION_REGISTRY.youtube.video),
     },
   };
 }

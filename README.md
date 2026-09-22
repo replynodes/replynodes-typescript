@@ -2,7 +2,7 @@
 
 Official **TypeScript and JavaScript SDK for ReplyNodes**, the web context API for software and AI agents.
 
-Use one normalized API to retrieve structured public web context from **web pages, Google Search, YouTube, Reddit, and the Apple App Store** without maintaining a separate integration for every source.
+Use one normalized API to retrieve structured public web context from the supported public ReplyNodes read surfaces without maintaining a separate integration for every source.
 
 > Package: [`@replynodes/sdk`](https://www.npmjs.com/package/@replynodes/sdk)  
 > Website: [replynodes.com](https://replynodes.com)  
@@ -55,13 +55,28 @@ Instead of integrating and maintaining multiple provider-specific APIs and scrap
 
 ## Supported API surfaces
 
-| Source | TypeScript SDK methods |
+The wrapper exposes all 77 authenticated GET operations in the vendored public
+OpenAPI contract through intentional resource/action namespaces:
+
+| Resource | Methods |
 | --- | --- |
-| Web | `client.web.scrape(...)` |
-| Google Search | `client.google.search(...)` |
-| YouTube | `client.youtube.search(...)`, `comments(...)`, `transcript(...)` |
-| Reddit | `client.reddit.search(...)` |
-| Apple App Store | `client.appStore.search(...)`, `reviews(...)` |
+| App Store | `app`, `developer`, `list`, `privacy`, `ratings`, `reviews`, `search`, `similar`, `suggest` |
+| Brand | `fonts`, `retrieve`, `search`, `styleguide` |
+| FOMO | `alerts`, `leaderboard`, `notifications`, `search`, `thesis`, `thesisByToken`, `thesisByUser`, `thesisByUserToken`, `tokenHolders`, `tokensGraduated`, `tokensMostHeld`, `tokensTrending`, `trade`, `userBalances`, `userProfile`, `userTrades` |
+| Google | `search` |
+| Google Maps | `placeDetails`, `placeReviews`, `searchPlaces` |
+| Google Play | `appDetails`, `availability`, `categories`, `categoryApps`, `dataSafety`, `developer`, `permissions`, `reviews`, `search`, `similarApps`, `suggest` |
+| Google Shopping | `productOffers`, `search` |
+| Hacker News | `item`, `search`, `storiesAsk`, `storiesBest`, `storiesJob`, `storiesNew`, `storiesShow`, `storiesTop`, `user` |
+| Instagram | `posts`, `profile` |
+| Reddit | `postById`, `postByPermalink`, `search`, `subredditPosts`, `userActivity`, `userPosts` |
+| TikTok | `post`, `user`, `userPosts` |
+| Web | `brand`, `crawl`, `map`, `scrape`, `search` |
+| YouTube | `channel`, `comments`, `playlist`, `related`, `search`, `transcript`, `video` |
+
+`client.web.search(...)` remains a backward-compatible alias for
+`client.google.search(...)`. The supported surface is contract-derived; the
+SDK does not expose routes absent from the vendored OpenAPI document.
 
 The SDK intentionally exposes only routes present in the vendored public OpenAPI contract.
 
