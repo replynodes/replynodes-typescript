@@ -1,11 +1,27 @@
 {
   "name": "@replynodes/sdk",
   "version": "0.3.0",
-  "description": "OpenAPI client for @replynodes/sdk",
-  "author": "OpenAPI-Generator",
+  "description": "Internal generated OpenAPI sources for @replynodes/sdk",
+  "private": true,
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/GIT_USER_ID/GIT_REPO_ID.git"
+    "url": "https://github.com/replynodes/replynodes-typescript.git"
+  },
+  "homepage": "https://replynodes.com",
+  "bugs": {
+    "url": "https://github.com/replynodes/replynodes-typescript/issues"
+  },
+  "keywords": [
+    "replynodes",
+    "sdk",
+    "rest",
+    "api",
+    "typescript",
+    "fetch"
+  ],
+  "engines": {
+    "node": ">=18"
   },
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
